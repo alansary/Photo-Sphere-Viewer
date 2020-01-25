@@ -6,7 +6,7 @@
     "recurse": true,
     "private": false,
     "template": "node_modules/@pixi/jsdoc-template",
-    "readme": "build/jsdoc.md"
+    "readme": "docs/jsdoc.md"
   },
   "plugins": [
     "plugins/markdown",
@@ -18,6 +18,6 @@
     "meta": {
       "title": "Photo Sphere Viewer API Documentation"
     },
-    "favicon": "build/jsdoc.png"
+    "favicon": "docs/.vuepress/public/favicon.png"
   }
 }

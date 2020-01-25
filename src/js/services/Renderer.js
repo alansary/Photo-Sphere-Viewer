@@ -253,7 +253,7 @@ export class Renderer extends AbstractService {
   __createScene() {
     this.raycaster = new THREE.Raycaster();
 
-    this.renderer = this.config.webgl ? new THREE.WebGLRenderer() : new THREE.CanvasRenderer();
+    this.renderer = new THREE.WebGLRenderer();
     this.renderer.setSize(this.prop.size.width, this.prop.size.height);
     this.renderer.setPixelRatio(SYSTEM.pixelRatio);
 
@@ -304,8 +304,7 @@ export class Renderer extends AbstractService {
     const geometry = new THREE.SphereGeometry(SPHERE_RADIUS * scale, SPHERE_VERTICES, SPHERE_VERTICES, -Math.PI / 2);
 
     const material = new THREE.MeshBasicMaterial({
-      side    : THREE.DoubleSide, // needs to be DoubleSide for CanvasRenderer
-      overdraw: this.config.webgl ? 0 : 1,
+      side: THREE.DoubleSide, // TODO needed for CanvasRenderer, can it be removed ?
     });
 
     const mesh = new THREE.Mesh(geometry, material);
@@ -327,8 +326,7 @@ export class Renderer extends AbstractService {
     const materials = [];
     for (let i = 0; i < 6; i++) {
       materials.push(new THREE.MeshBasicMaterial({
-        side    : THREE.BackSide,
-        overdraw: this.config.webgl ? 0 : 1,
+        side: THREE.BackSide,
       }));
     }
 

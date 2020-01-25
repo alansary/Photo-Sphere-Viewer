@@ -43,7 +43,6 @@ export const DEFAULTS = {
   mousemoveHover     : false,
   touchmoveTwoFingers: false,
   clickEventOnMarker : false,
-  webgl              : true,
   useXmpData         : true,
   panoData           : null,
   withCredentials    : false,
@@ -105,8 +104,6 @@ export function getConfig(options) {
   const config = clone(DEFAULTS);
   deepmerge(config, options);
 
-  config.webgl &= SYSTEM.isWebGLSupported;
-
   // check container
   if (!config.container) {
     throw new PSVError('No value given for container.');
@@ -117,9 +114,9 @@ export function getConfig(options) {
     throw new PSVError('Canvas is not supported.');
   }
 
-  // additional scripts if webgl not supported/disabled
-  if (!config.webgl && !SYSTEM.checkTHREE('CanvasRenderer', 'Projector')) {
-    throw new PSVError('Missing Three.js components: CanvasRenderer, Projector.');
+  // must support WebGL
+  if (!SYSTEM.isWebGLSupported) {
+    throw new PSVError('WebGL is not supported.');
   }
 
   // longitude range must have two values
